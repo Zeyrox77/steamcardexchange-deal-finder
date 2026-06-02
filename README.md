@@ -23,9 +23,18 @@ A desktop app that scans [Steam Card Exchange](https://www.steamcardexchange.net
 ![alt text](image.png)
 
 ---
+## ⬇️ Download
+
+> **No Python required!** Just download the EXE and run it.
+
+[![Download EXE](https://img.shields.io/github/v/release/Zeyrox77/steamcardexchange-deal-finder?label=Download&logo=windows)](https://github.com/Zeyrox77/steamcardexchange-deal-finder/releases/latest)
 
 ## Installation
 
+### Option A – Direct download (recommended)
+Download the latest `.exe` from [Releases](https://github.com/Zeyrox77/steamcardexchange-deal-finder/releases).
+
+### Option B – Run from source
 **1. Clone the repo**
 ```bash
 git clone https://github.com/Zeyrox77/steamcardexchange-deal-finder.git
