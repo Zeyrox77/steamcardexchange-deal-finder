@@ -87,6 +87,13 @@ pip install -r requirements.txt
 
 ---
 
+## 📱 Android App
+
+There's now a native **Android** version too — same features, built with Kotlin + Jetpack Compose.
+See [`android/`](android/) for the source and build instructions.
+
+---
+
 ## Disclaimer
 
 This tool is for personal use only. It accesses publicly available data from Steam Card Exchange.  

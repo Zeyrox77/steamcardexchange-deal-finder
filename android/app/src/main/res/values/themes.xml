@@ -1,0 +1,7 @@
+<resources>
+    <!-- Base application theme. The actual colors are provided by Compose Material3. -->
+    <style name="Theme.SteamCardDealFinder" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/black</item>
+    </style>
+</resources>
