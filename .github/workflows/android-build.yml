@@ -1,0 +1,69 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [main, android-app]
+    paths:
+      - "android/**"
+      - ".github/workflows/android-build.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Assemble debug APK
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: android
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build debug APK
+        run: ./gradlew :app:assembleDebug --no-daemon
+
+      - name: Rename APK
+        run: cp app/build/outputs/apk/debug/app-debug.apk steam-card-deal-finder.apk
+
+      # 1) Always available: download from the Actions run "Artifacts" section
+      - name: Upload APK as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: steam-card-deal-finder-apk
+          path: android/steam-card-deal-finder.apk
+          if-no-files-found: error
+
+      # 2) Stable download link: published to a "android-latest" release
+      - name: Publish APK to a release (stable download link)
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/android-app'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: android-latest
+          name: "Android APK (latest build)"
+          body: |
+            Automatically built debug APK of the Steam Card Deal Finder Android app.
+
+            **Download:** `steam-card-deal-finder.apk` below.
+
+            > This is a debug build, not signed for the Play Store. To install,
+            > enable "Install unknown apps" on your device and open the APK.
+          files: android/steam-card-deal-finder.apk
+          prerelease: true
+          fail_on_unmatched_files: true
